@@ -1,0 +1,13 @@
+package com.jools.hzxinterfaces;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class HzxInterfacesApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(HzxInterfacesApplication.class, args);
+	}
+
+}
