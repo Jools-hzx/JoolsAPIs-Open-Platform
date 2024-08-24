@@ -3,7 +3,6 @@ package com.jools.joolsclientsdk;
 import com.jools.joolsclientsdk.client.JoolsHttpClient;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
