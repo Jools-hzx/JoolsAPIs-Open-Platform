@@ -20,16 +20,19 @@ import java.time.Instant;
 public class NameController {
 
     @GetMapping("/getName")
+    @ResponseBody
     public String getNameByGet() {
         return "GET-请求名称:" + " Jools ";
     }
 
     @PostMapping("/getName")
+    @ResponseBody
     public String getNameByPost(@RequestParam("username") String name) {
         return "POST-请求名称:" + name;
     }
 
     @PostMapping("/user")
+    @ResponseBody
     public String getNameByUser(@RequestBody User user, HttpServletRequest request) {
 
         System.out.println("进入了 getNameByUser(@RequestBody User user, HttpServletRequest request) 接口");
