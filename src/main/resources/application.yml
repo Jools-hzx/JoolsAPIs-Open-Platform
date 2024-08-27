@@ -111,3 +111,7 @@ knife4j:
         api-rule: package
         api-rule-resources:
           - com.yupi.springbootinit.controller
+jools:
+  client:
+    access-key: jools
+    secret-key: 123456

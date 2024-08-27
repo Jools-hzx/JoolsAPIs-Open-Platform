@@ -40,7 +40,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.yupi.springbootinit.service.impl.UserServiceImpl.SALT;
+import static com.yupi.springbootinit.service.impl.UserServiceImpl.KEY_SALT;
+
+//import static com.yupi.springbootinit.service.impl.UserServiceImpl.SALT;
 
 /**
  * 用户接口
@@ -174,7 +176,7 @@ public class UserController {
         BeanUtils.copyProperties(userAddRequest, user);
         // 默认密码 12345678
         String defaultPassword = "12345678";
-        String encryptPassword = DigestUtils.md5DigestAsHex((SALT + defaultPassword).getBytes());
+        String encryptPassword = DigestUtils.md5DigestAsHex((KEY_SALT + defaultPassword).getBytes());
         user.setUserPassword(encryptPassword);
         boolean result = userService.save(user);
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);

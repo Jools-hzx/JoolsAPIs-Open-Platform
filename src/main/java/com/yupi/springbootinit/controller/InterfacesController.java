@@ -3,6 +3,8 @@ package com.yupi.springbootinit.controller;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.gson.Gson;
+import com.jools.joolsclientsdk.client.JoolsHttpClient;
 import com.yupi.springbootinit.annotation.AuthCheck;
 import com.yupi.springbootinit.common.BaseResponse;
 import com.yupi.springbootinit.common.DeleteRequest;
@@ -13,10 +15,12 @@ import com.yupi.springbootinit.constant.UserConstant;
 import com.yupi.springbootinit.exception.BusinessException;
 import com.yupi.springbootinit.exception.ThrowUtils;
 import com.yupi.springbootinit.model.dto.interfacesInfo.InterfacesInfoAddRequest;
+import com.yupi.springbootinit.model.dto.interfacesInfo.InterfacesInfoInvokeRequest;
 import com.yupi.springbootinit.model.dto.interfacesInfo.InterfacesInfoQueryRequest;
 import com.yupi.springbootinit.model.dto.interfacesInfo.InterfacesInfoUpdateRequest;
 import com.yupi.springbootinit.model.entity.InterfacesInfo;
 import com.yupi.springbootinit.model.entity.User;
+import com.yupi.springbootinit.model.enums.InterfaceStatusEnum;
 import com.yupi.springbootinit.model.vo.InterfacesInfoVO;
 import com.yupi.springbootinit.service.InterfacesInfoService;
 import com.yupi.springbootinit.service.UserService;
@@ -50,6 +54,9 @@ public class InterfacesController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private JoolsHttpClient joolsHttpClient;
 
     // region 增删改查
 
@@ -129,6 +136,129 @@ public class InterfacesController {
         return ResultUtils.success(result);
     }
 
+
+    /**
+     * 更新上线接口（仅管理员）
+     *
+     * @param interfacesInfoUpdateRequest
+     * @return
+     */
+    @PostMapping("/update/status/online")
+    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)  //基于 AOP 机制校验用户身份
+    public BaseResponse<Boolean> onlineInterfacesInfo(@RequestBody InterfacesInfoUpdateRequest interfacesInfoUpdateRequest) {
+        //请求参数校验
+        if (interfacesInfoUpdateRequest == null || interfacesInfoUpdateRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        //1. 校验该接口是否存在
+        Long interfaceId = interfacesInfoUpdateRequest.getId();
+        InterfacesInfo interfacesInfo = interfacesInfoService.getById(interfaceId);
+        if (null == interfaceId) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+
+        //2. 判断该接口是否可以调用
+        try {
+            joolsHttpClient.testPostRequest("Jools Wakoo");
+        } catch (Exception e) {
+            throw new BusinessException(ErrorCode.OPERATION_ERROR);
+        }
+
+        //3. 更新接口状态，配置枚举类
+        interfacesInfo.setId(interfaceId);
+        interfacesInfo.setStatus(InterfaceStatusEnum.ONLINE.getValue());
+
+        boolean result = interfacesInfoService.updateById(interfacesInfo);
+        return ResultUtils.success(result);
+    }
+
+    /**
+     * 更新下线接口（仅管理员）
+     *
+     * @param interfacesInfoUpdateRequest
+     * @return
+     */
+    @PostMapping("/update/status/offline")
+    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)  //基于 AOP 机制校验用户身份
+    public BaseResponse<Boolean> offlineInterfacesInfo(@RequestBody InterfacesInfoUpdateRequest interfacesInfoUpdateRequest) {
+        //请求参数校验
+        if (interfacesInfoUpdateRequest == null || interfacesInfoUpdateRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        //1. 校验该接口是否存在
+        Long interfaceId = interfacesInfoUpdateRequest.getId();
+        InterfacesInfo interfacesInfo = interfacesInfoService.getById(interfaceId);
+        if (null == interfaceId) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+
+        //2. 更新接口状态，修改为下线
+        interfacesInfo.setId(interfaceId);
+        interfacesInfo.setStatus(InterfaceStatusEnum.OFFLINE.getValue());
+
+        boolean result = interfacesInfoService.updateById(interfacesInfo);
+        return ResultUtils.success(result);
+    }
+
+    /**
+     * 请求调用接口
+     *
+     * @param interfacesInfoUpdateRequest
+     * @return
+     */
+    @PostMapping("/update/status/invoke")
+//    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)  //基于 AOP 机制校验用户身份
+    public BaseResponse<String> invokeInterfaces(@RequestBody InterfacesInfoInvokeRequest interfacesInfoInvokeRequest,
+                                                 HttpServletRequest request) {
+        //请求参数校验
+        if (interfacesInfoInvokeRequest == null || interfacesInfoInvokeRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+
+        Long interfaceId = interfacesInfoInvokeRequest.getId();
+        String requestParams = interfacesInfoInvokeRequest.getUserRequestParams();
+
+        //校验用户是否登录
+        User loginUser = userService.getLoginUser(request);
+
+        //1. 校验该接口是否存在
+        InterfacesInfo interfaceEntity = interfacesInfoService.getById(interfaceId);
+        if (null == interfaceEntity) {
+            log.error("请求接口 id:{} 不存在", interfaceId);
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+
+        //2. 校验接口状态，如果已经下线则不能请求
+        if (interfaceEntity.getStatus().equals(InterfaceStatusEnum.OFFLINE)) {
+            log.error("请求接口 id:{} 已经下线了", interfaceId);
+            throw new BusinessException(ErrorCode.OPERATION_ERROR);
+        }
+
+        //校验 accessKey 和 secretKey
+        String accessKey = loginUser.getAccessKey();
+        String secretKey = loginUser.getSecretKey();
+        if (StringUtils.isBlank(accessKey) || StringUtils.isBlank(secretKey)) {
+            log.error("用户 id:{} 非法请求接口调用", loginUser.getId());
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
+        }
+        //TODO: 到数据库内调用校验
+
+        //重新构建请求 client; 防止始终用管理员账号、密码来测试
+        JoolsHttpClient client = new JoolsHttpClient(accessKey, secretKey);
+
+        //校验请求参数
+        //将请求参数的格式转换成为 JSON 格式
+        Gson gson = new Gson();
+        com.jools.joolsclientsdk.model.User jsonReq = gson.fromJson(requestParams,
+                com.jools.joolsclientsdk.model.User.class);
+        System.out.println("接收到 JSON 格式用户数据:" + jsonReq);
+
+        //请求调用接口 - SDK 会携带 accessKey 和 secretKey 到接口平台校验
+        String result = client.testModelPost(jsonReq);
+
+        return ResultUtils.success(result);
+    }
+
     /**
      * 根据 id 获取
      *
@@ -144,8 +274,9 @@ public class InterfacesController {
         if (interfacesInfo == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
-//        return ResultUtils.success(interfacesInfoService.getInterfacesInfoVO(interfacesInfo, request));
-        return null;
+        //将 InterfacesInfo 转换为 InterfacesInfoVo
+        InterfacesInfoVO vo = interfacesInfoService.convert2Vo(interfacesInfo);
+        return ResultUtils.success(vo);
     }
 
     /**
