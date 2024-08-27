@@ -77,6 +77,21 @@ export async function updateInterfacesInfoUsingPost(
   });
 }
 
+/** invokeInterfaces POST /api/interfacesInfo/update/status/invoke */
+export async function invokeInterfacesUsingPost(
+  body: API.InterfacesInfoInvokeRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseString_>('/api/interfacesInfo/update/status/invoke', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** offlineInterfacesInfo POST /api/interfacesInfo/update/status/offline */
 export async function offlineInterfacesInfoUsingPost(
   body: API.InterfacesInfoUpdateRequest,
