@@ -50,27 +50,29 @@ public class JoolsHttpClient {
         return params;
     }
 
-    public void testGetRequest() {
+    public String testGetRequest() {
         //测试 GET
         String res1 = HttpUtil.get("http://localhost:10000/api/name/getName");
         System.out.println("GET 的请求结果为:" + res1);
+        return res1;
     }
 
-    public void testPostRequest(@RequestParam String username) {
+    public String testPostRequest(@RequestParam String username) {
         //测试 POST
         Map<String, Object> params = new HashMap<>();
         params.put("username", username);
         String postRes = HttpUtil.post("http://localhost:10000/api/name/getName", params);
         System.out.println("POST 的请求结果为:" + postRes);
+        return postRes;
     }
 
-    public void testModelPost(@RequestBody User user) {
+    public String testModelPost(@RequestBody User user) {
 
         //测试 POST user
         String json = JSONUtil.toJsonStr(user);
         HttpResponse httpResponse = HttpRequest
                 .post("http://localhost:10000/api/name/user")
-                .addHeaders(getParamsMap(json))     //基于传入的 user 构建消息体
+                .addHeaders(getParamsMap(json))     //Json格式的 User 信息构建请求头参数
                 .body(json)
                 .execute();
 
@@ -81,5 +83,7 @@ public class JoolsHttpClient {
         //获取结果
         String result = httpResponse.body();
         System.out.println(result);
+
+        return result;
     }
 }
