@@ -2,19 +2,15 @@
 # HZX-Open-APIs
 A simple API open platform that allows developers to easily query and call various interfaces. It also makes it convenient for administrators to manage the interfaces.
 =======
-# SpringBoot 项目初始模板
+# 基于 SpringBoot 项目快速开发初始模板二次开发
 
+模板来源
 > 作者：[程序员鱼皮](https://github.com/liyupi)
 > 仅分享于 [编程导航知识星球](https://yupi.icu)
 
-基于 Java SpringBoot 的项目初始模板，整合了常用框架和主流业务的示例代码。
 
-只需 1 分钟即可完成内容网站的后端！！！大家还可以在此基础上快速开发自己的项目。
-
-[toc]
 
 ## 模板特点
-
 ### 主流框架 & 特性
 
 - Spring Boot 2.7.x（贼新）
@@ -26,7 +22,7 @@ A simple API open platform that allows developers to easily query and call vario
 - Spring 事务注解
 
 ### 数据存储
-
+支持:
 - MySQL 数据库
 - Redis 内存数据库
 - Elasticsearch 搜索引擎
@@ -78,7 +74,7 @@ A simple API open platform that allows developers to easily query and call vario
 
 ## 快速上手
 
-> 所有需要修改的地方鱼皮都标记了 `todo`，便于大家找到修改的位置~
+> 所有需要修改的地方都标记了 `todo`，便于大家找到修改的位置~
 
 ### MySQL 数据库
 
