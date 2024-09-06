@@ -1,6 +1,8 @@
 package com.yupi.springbootinit.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yupi.springbootinit.common.ErrorCode;
 import com.yupi.springbootinit.exception.BusinessException;
@@ -11,6 +13,7 @@ import com.yupi.springbootinit.model.vo.UserInterfaceInfoVO;
 import com.yupi.springbootinit.service.UserInterfaceInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.elasticsearch.core.query.UpdateQuery;
 import org.springframework.stereotype.Service;
 
 /**
@@ -71,6 +74,28 @@ public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoM
                 throw new BusinessException(ErrorCode.PARAMS_ERROR, "总共可调用次数不能为空");
             }
         }
+    }
+
+    @Override
+    public boolean invokeInterfaceCount(Long interfaceInfoId, Long userId) {
+
+        //检查输入
+        if (interfaceInfoId <= 0 || userId <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数校验失败!");
+        }
+
+        //查询数据库更新，基于当前调用的接口 id 和分配的 userId
+        UpdateWrapper<UserInterfaceInfo> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("interfaceInfoId", interfaceInfoId);
+        updateWrapper.eq("userId", userId);
+
+        //剩余可以调用次数需要大于等于 0
+        updateWrapper.gt("leftNum", 0);
+
+        //更新接口剩余的可调用次数和总计调用次数
+        updateWrapper.setSql("leftNum = leftNum - 1, totalNum = totalNum + 1");
+
+        return this.update(updateWrapper);
     }
 
     @Override
