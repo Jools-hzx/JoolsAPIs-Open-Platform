@@ -2,15 +2,24 @@
 # HZX-Open-APIs
 A simple API open platform that allows developers to easily query and call various interfaces. It also makes it convenient for administrators to manage the interfaces.
 =======
-# 基于 SpringBoot 项目快速开发初始模板二次开发
+
+## 各个分支项目内容
+```txt
+1. main 分支: admin APIs 管理后台
+2. api-gateway-main 分支: 网关子项目，统一处理调用接口请求的相关操作(统计调用次数、权限校验、跨域、计费、路由、接口保护、日志、缓存、流量染色等)
+3. hzx-interfaces-main 分支: 模拟存储各个接口的平台
+4. api-client-sdk-main 分支: 自定义 SpringBoot starter 客户端 SDK，工具类，让其他项目和用户更加方便地调用接口的源码包
+5. open-api-fontend-main 分支:  前端项目，基于 Ant Design Pro 项目模板二次开发(用户权限校验，管理员控制面板功能，远程调用接口平台功能)
+```
+
+## main 分支 - 管理员接口后台管理平台
+### 基于 SpringBoot 项目快速开发初始模板二次开发
 
 模板来源
 > 作者：[程序员鱼皮](https://github.com/liyupi)
 > 仅分享于 [编程导航知识星球](https://yupi.icu)
 
-
-
-## 模板特点
+## 理员接口后台管理平台 - 模板特点
 ### 主流框架 & 特性
 
 - Spring Boot 2.7.x（贼新）
