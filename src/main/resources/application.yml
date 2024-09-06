@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: getName_path
+          uri: http://localhost:10000
+          predicates:
+            - Path=/api/name/{api_url}
+
+server:
+  port: 8899
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: trace
