@@ -24,6 +24,9 @@ public class JoolsHttpClient {
     private String accessKey;
     private String secretKey;
 
+    //请求网关URI
+    private static final String GATEWAY_URI = "http://localhost:8899";
+
     public JoolsHttpClient(String accessKey, String secretKey) {
         this.accessKey = accessKey;
         this.secretKey = secretKey;
@@ -52,7 +55,7 @@ public class JoolsHttpClient {
 
     public String testGetRequest() {
         //测试 GET
-        String res1 = HttpUtil.get("http://localhost:10000/api/name/getName");
+        String res1 = HttpUtil.get(GATEWAY_URI+"/api/name/getName");
         System.out.println("GET 的请求结果为:" + res1);
         return res1;
     }
@@ -61,7 +64,7 @@ public class JoolsHttpClient {
         //测试 POST
         Map<String, Object> params = new HashMap<>();
         params.put("username", username);
-        String postRes = HttpUtil.post("http://localhost:10000/api/name/getName", params);
+        String postRes = HttpUtil.post(GATEWAY_URI+"/api/name/getName", params);
         System.out.println("POST 的请求结果为:" + postRes);
         return postRes;
     }
@@ -71,7 +74,7 @@ public class JoolsHttpClient {
         //测试 POST user
         String json = JSONUtil.toJsonStr(user);
         HttpResponse httpResponse = HttpRequest
-                .post("http://localhost:10000/api/name/user")
+                .post(GATEWAY_URI+"/api/name/user")
                 .addHeaders(getParamsMap(json))     //Json格式的 User 信息构建请求头参数
                 .body(json)
                 .execute();
