@@ -38,14 +38,14 @@ public class NameController {
         System.out.println("进入了 getNameByUser(@RequestBody User user, HttpServletRequest request) 接口");
 
         //基于请求头获取参数
-        //accessKey 可以先到数据库去校验
+        //TODO: accessKey 可以先到数据库去校验
         String accessKey = request.getHeader("accessKey");
         String nonce = request.getHeader("nonce");
         String body = request.getHeader("body");
         String timestamp = request.getHeader("timestamp");
         String sign = request.getHeader("sign");
 
-        //校验权限，这里模拟以下，直接判断与测试 accessKey 是否一致
+        //校验权限，这里简化，直接判断与测试 accessKey 是否一致
         if (!accessKey.equals(SignUtil.TEST_ACCESS_KEY)) {
             throw new RuntimeException("无权限! - AccessKey 出错");
         }
@@ -62,7 +62,7 @@ public class NameController {
 
         //判断签名
         //如何拼接这个 sign? 就按照客户端拼接的方式来进行。
-        //secretKey 可以后期通过查询数据库获取
+        //TODO: secretKey 可以后期通过查询数据库获取
         if (!sign.equals(SignUtil.getSign(body, SignUtil.TEST_SECRET_KEY))) {
             throw new RuntimeException("无权限 - API签名校验出错");
         }
