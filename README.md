@@ -2,19 +2,24 @@
 # HZX-Open-APIs
 A simple API open platform that allows developers to easily query and call various interfaces. It also makes it convenient for administrators to manage the interfaces.
 =======
-# SpringBoot 项目初始模板
 
+## 各个分支项目内容
+```txt
+1. main 分支: admin APIs 管理后台
+2. api-gateway-main 分支: 网关子项目，统一处理调用接口请求的相关操作(统计调用次数、权限校验、跨域、计费、路由、接口保护、日志、缓存、流量染色等)
+3. hzx-interfaces-main 分支: 模拟存储各个接口的平台
+4. api-client-sdk-main 分支: 自定义 SpringBoot starter 客户端 SDK，工具类，让其他项目和用户更加方便地调用接口的源码包
+5. open-api-fontend-main 分支:  前端项目，基于 Ant Design Pro 项目模板二次开发(用户权限校验，管理员控制面板功能，远程调用接口平台功能)
+```
+
+## main 分支 - 管理员接口后台管理平台
+### 基于 SpringBoot 项目快速开发初始模板二次开发
+
+模板来源
 > 作者：[程序员鱼皮](https://github.com/liyupi)
 > 仅分享于 [编程导航知识星球](https://yupi.icu)
 
-基于 Java SpringBoot 的项目初始模板，整合了常用框架和主流业务的示例代码。
-
-只需 1 分钟即可完成内容网站的后端！！！大家还可以在此基础上快速开发自己的项目。
-
-[toc]
-
-## 模板特点
-
+## 理员接口后台管理平台 - 模板特点
 ### 主流框架 & 特性
 
 - Spring Boot 2.7.x（贼新）
@@ -26,7 +31,7 @@ A simple API open platform that allows developers to easily query and call vario
 - Spring 事务注解
 
 ### 数据存储
-
+支持:
 - MySQL 数据库
 - Redis 内存数据库
 - Elasticsearch 搜索引擎
@@ -78,7 +83,7 @@ A simple API open platform that allows developers to easily query and call vario
 
 ## 快速上手
 
-> 所有需要修改的地方鱼皮都标记了 `todo`，便于大家找到修改的位置~
+> 所有需要修改的地方都标记了 `todo`，便于大家找到修改的位置~
 
 ### MySQL 数据库
 
