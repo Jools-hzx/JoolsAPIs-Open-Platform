@@ -1,7 +1,7 @@
-package com.jools.apigateway.config;
+package com.jools.project.config;
 
-import com.jools.apigateway.utils.ServerHttpResponseUtils;
-import com.jools.apigateway.utils.ValidatorUtils;
+import com.jools.project.utils.ServerHttpResponseUtils;
+import com.jools.project.utils.ValidatorUtils;
 import com.jools.joolsclientsdk.uitls.SignUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
@@ -26,8 +26,6 @@ import reactor.core.publisher.Mono;
 
 
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -77,7 +75,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
         String id = request.getId();
         String pathValue = request.getPath().value();
         String methodName = request.getMethod().name();
-        String hostStr = Objects.requireNonNull(request.getLocalAddress()).getHostString();
+        String hostStr = Objects.requireNonNull(request.getRemoteAddress()).getHostString();
         MultiValueMap<String, String> queryParams = request.getQueryParams();
         log.info("请求id: {}", id);
         log.info("请求来源: {}", hostStr);
@@ -135,22 +133,14 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
         //TODO: 数据库中查询模拟接口是否存在，已经各种请求参数校验  - 后期可以使用 OpenFeign等技术 调用后台模拟接口平台完成校验
 
         //6 - 如果鉴权并且参数校验通过，请求转发，调用模拟接口
-        Mono<Void> result = chain.filter(exchange);
-
-        //7 - 响应日志
-        return handleResponse(exchange, chain);
-        /*log.info("GlobalFilter - filter - 响应日志: {}", response.getStatusCode());
-
-        //8 - 调用成功，接口调用次数 + 1
-        //TODO - 使用 AOP 机制完成接口调用次数更新！
-        //相关方法已经在后台 UserInterfaceService 的 invokeInterfaceCount 实现
-
-        //9 - 调用失败，返回一个规范的错误码
-        if (!response.getStatusCode().equals(HttpStatus.OK)) {
+        try {
+            Mono<Void> result = chain.filter(exchange);
+        } catch (Exception e) {
             ServerHttpResponseUtils.internelServerError(response);
             return response.setComplete();
         }
-        return result;*/
+
+        return handleResponse(exchange, chain);
     }
 
     public Mono<Void> handleResponse(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -196,7 +186,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
                                         String data = new String(content, StandardCharsets.UTF_8);//data
                                         sb2.append(data);
 
-                                        //打印响应日志
+                                        //7. 打印响应日志
                                         log.info("响应的结果为: {}", data);
                                         return bufferFactory.wrap(content);
                                     }));

@@ -6,7 +6,6 @@ spring:
           uri: http://localhost:10000
           predicates:
             - Path=/api/name/{api_url}
-
 server:
   port: 8899
 logging:
@@ -15,3 +14,14 @@ logging:
       springframework:
         cloud:
           gateway: trace
+dubbo:
+  application:    # 设置应用名称
+    name: dubbo-springboot-demo-provider
+  protocol:
+    name: dubbo
+    port: 20880
+  registry:
+    id: nacos-registry    # 配置注册中心为 Nacos，使用的地址是 nacos://localhost:8848
+    address: nacos://localhost:8848
+  cache:
+    file: D:/Maven/.m2/.dubbo

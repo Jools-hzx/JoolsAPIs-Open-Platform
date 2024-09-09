@@ -1,4 +1,4 @@
-package com.jools.apigateway.utils;
+package com.jools.project.utils;
 
 import java.time.Duration;
 import java.time.Instant;

@@ -1,4 +1,4 @@
-package com.jools.apigateway.utils;
+package com.jools.project.utils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
