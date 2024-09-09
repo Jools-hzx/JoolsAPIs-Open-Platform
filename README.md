@@ -10,6 +10,7 @@ A simple API open platform that allows developers to easily query and call vario
 3. hzx-interfaces-main 分支: 模拟存储各个接口的平台
 4. api-client-sdk-main 分支: 自定义 SpringBoot starter 客户端 SDK，工具类，让其他项目和用户更加方便地调用接口的源码包
 5. open-api-fontend-main 分支:  前端项目，基于 Ant Design Pro 项目模板二次开发(用户权限校验，管理员控制面板功能，远程调用接口平台功能)
+6. api-jools-commons-main 分支: 公共模块，共同使用的 model、interface 服务
 ```
 
 ## main 分支 - 管理员接口后台管理平台
