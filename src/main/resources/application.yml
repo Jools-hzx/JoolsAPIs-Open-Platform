@@ -110,8 +110,21 @@ knife4j:
       default:
         api-rule: package
         api-rule-resources:
-          - com.yupi.springbootinit.controller
+          - com.jools.project.controller
 jools:
   client:
     access-key: jools
     secret-key: 123456
+dubbo:
+  application:
+    # 设置应用名称
+    name: dubbo-springboot-demo-provider
+  protocol:   # 配置端口协议
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://localhost:8848
+    id: nacos-registry
+  cache:
+    # 更改缓存目录
+    file: D:/Maven/.m2/.dubbo

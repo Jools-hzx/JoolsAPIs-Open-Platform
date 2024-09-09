@@ -176,7 +176,7 @@ PUT post_v1
 
 ```
 // 指定生成参数
-String packageName = "com.yupi.springbootinit";
+String packageName = "com.jools.project";
 String dataName = "用户评论";
 String dataKey = "userComment";
 String upperDataKey = "UserComment";
