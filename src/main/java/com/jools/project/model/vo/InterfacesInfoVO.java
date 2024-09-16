@@ -1,6 +1,7 @@
 package com.jools.project.model.vo;
 
-import com.jools.project.model.entity.InterfacesInfo;
+
+import com.jools.joolscommon.model.entity.InterfacesInfo;
 
 /**
  * @author Jools He

@@ -1,7 +1,6 @@
 package com.jools.project.aop;
 
 import com.jools.project.common.ErrorCode;
-import com.jools.project.model.entity.User;
 import com.jools.project.model.enums.UserRoleEnum;
 import com.jools.project.annotation.AuthCheck;
 import com.jools.project.exception.BusinessException;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
+import com.jools.joolscommon.model.entity.User;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 

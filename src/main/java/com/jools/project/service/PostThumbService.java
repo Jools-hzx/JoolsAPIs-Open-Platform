@@ -1,9 +1,8 @@
 package com.jools.project.service;
 
 import com.jools.project.model.entity.PostThumb;
-import com.jools.project.model.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
-
+import com.jools.joolscommon.model.entity.User;
 /**
  * 帖子点赞服务
  *

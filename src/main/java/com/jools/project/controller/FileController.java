@@ -1,12 +1,12 @@
 package com.jools.project.controller;
 
 import cn.hutool.core.io.FileUtil;
+import com.jools.joolscommon.model.entity.User;
 import com.jools.project.common.BaseResponse;
 import com.jools.project.common.ErrorCode;
 import com.jools.project.common.ResultUtils;
 import com.jools.project.exception.BusinessException;
 import com.jools.project.model.dto.file.UploadFileRequest;
-import com.jools.project.model.entity.User;
 import com.jools.project.model.enums.FileUploadBizEnum;
 import com.jools.project.constant.FileConstant;
 import com.jools.project.manager.CosManager;

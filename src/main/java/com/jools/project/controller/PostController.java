@@ -2,6 +2,7 @@ package com.jools.project.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jools.joolscommon.model.entity.User;
 import com.jools.project.annotation.AuthCheck;
 import com.jools.project.common.BaseResponse;
 import com.jools.project.common.DeleteRequest;
@@ -14,7 +15,6 @@ import com.jools.project.model.dto.post.PostEditRequest;
 import com.jools.project.model.dto.post.PostQueryRequest;
 import com.jools.project.model.dto.post.PostUpdateRequest;
 import com.jools.project.model.entity.Post;
-import com.jools.project.model.entity.User;
 import com.jools.project.model.vo.PostVO;
 import com.jools.project.constant.UserConstant;
 import com.jools.project.service.PostService;

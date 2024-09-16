@@ -1,17 +1,20 @@
 package com.jools.project.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jools.joolscommon.model.entity.UserInterfaceInfo;
 import com.jools.project.common.ErrorCode;
 import com.jools.project.mapper.UserInterfaceInfoMapper;
-import com.jools.project.model.entity.UserInterfaceInfo;
 import com.jools.project.service.UserInterfaceInfoService;
 import com.jools.project.exception.BusinessException;
 import com.jools.project.model.vo.UserInterfaceInfoVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @author 10355
@@ -33,6 +36,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoMapper, UserInterfaceInfo>
         implements UserInterfaceInfoService {
+
+    @Resource
+    private UserInterfaceInfoMapper mapper;
 
     @Override
     public void validUserInterfaceInfo(UserInterfaceInfo userInterfaceInfo, Boolean add) {
@@ -93,6 +99,27 @@ public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoM
         updateWrapper.setSql("leftNum = leftNum - 1, totalNum = totalNum + 1");
 
         return this.update(updateWrapper);
+    }
+
+    @Override
+    public boolean canInvoke(Long interfaceInfoId, Long userId) {
+        if (interfaceInfoId == null || userId == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        QueryWrapper<UserInterfaceInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("interfaceInfoId", interfaceInfoId);
+        queryWrapper.eq("userId", userId);
+        queryWrapper.gt("leftNum", 0);
+        UserInterfaceInfo userInterfaceInfo = null;
+        try {
+            userInterfaceInfo = mapper.selectOne(queryWrapper);
+            if (userInterfaceInfo == null) {
+                return false;
+            }
+        } catch (Exception e) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR);
+        }
+        return true;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.jools.project.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jools.joolscommon.model.entity.User;
 import com.jools.project.common.BaseResponse;
 import com.jools.project.common.ErrorCode;
 import com.jools.project.common.ResultUtils;
@@ -10,7 +11,6 @@ import com.jools.project.model.dto.post.PostQueryRequest;
 import com.jools.project.model.dto.postfavour.PostFavourAddRequest;
 import com.jools.project.model.dto.postfavour.PostFavourQueryRequest;
 import com.jools.project.model.entity.Post;
-import com.jools.project.model.entity.User;
 import com.jools.project.model.vo.PostVO;
 import com.jools.project.service.PostFavourService;
 import com.jools.project.service.PostService;

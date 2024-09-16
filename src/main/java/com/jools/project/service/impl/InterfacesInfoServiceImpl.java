@@ -1,9 +1,9 @@
 package com.jools.project.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jools.joolscommon.model.entity.InterfacesInfo;
 import com.jools.project.common.ErrorCode;
 import com.jools.project.mapper.InterfacesInfoMapper;
-import com.jools.project.model.entity.InterfacesInfo;
 import com.jools.project.exception.BusinessException;
 import com.jools.project.service.InterfacesInfoService;
 import org.apache.commons.lang3.StringUtils;

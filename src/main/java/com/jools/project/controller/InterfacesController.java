@@ -4,14 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.gson.Gson;
 import com.jools.joolsclientsdk.client.JoolsHttpClient;
+import com.jools.joolscommon.model.entity.InterfacesInfo;
+import com.jools.joolscommon.model.entity.User;
 import com.jools.project.common.BaseResponse;
 import com.jools.project.common.DeleteRequest;
 import com.jools.project.common.ErrorCode;
 import com.jools.project.common.ResultUtils;
 import com.jools.project.model.dto.interfacesInfo.InterfacesInfoInvokeRequest;
 import com.jools.project.model.dto.interfacesInfo.InterfacesInfoUpdateRequest;
-import com.jools.project.model.entity.InterfacesInfo;
-import com.jools.project.model.entity.User;
 import com.jools.project.model.enums.InterfaceStatusEnum;
 import com.jools.project.model.vo.InterfacesInfoVO;
 import com.jools.project.annotation.AuthCheck;
@@ -201,7 +201,7 @@ public class InterfacesController {
     /**
      * 请求调用接口
      *
-     * @param interfacesInfoUpdateRequest
+     * @param interfacesInfoInvokeRequest
      * @return
      */
     @PostMapping("/update/status/invoke")

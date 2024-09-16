@@ -2,12 +2,12 @@ package com.jools.project.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jools.joolscommon.model.entity.User;
 import com.jools.project.common.ErrorCode;
 import com.jools.project.exception.BusinessException;
 import com.jools.project.mapper.PostThumbMapper;
 import com.jools.project.model.entity.Post;
 import com.jools.project.model.entity.PostThumb;
-import com.jools.project.model.entity.User;
 import com.jools.project.service.PostService;
 import com.jools.project.service.PostThumbService;
 

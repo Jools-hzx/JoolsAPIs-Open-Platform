@@ -1,8 +1,7 @@
 package com.jools.project.service;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.jools.project.model.entity.InterfacesInfo;
+import com.jools.joolscommon.model.entity.InterfacesInfo;
 import com.jools.project.model.vo.InterfacesInfoVO;
 import org.springframework.beans.BeanUtils;
 
@@ -14,10 +13,10 @@ import org.springframework.beans.BeanUtils;
 public interface InterfacesInfoService extends IService<InterfacesInfo> {
 
     /**
-     * 校验
+     * 校验更新请求
      *
      * @param interfacesInfo
-     * @param add
+     * @param add            TRUE 表示启用，否则表示禁用
      */
     void validInterfacesInfo(InterfacesInfo interfacesInfo, boolean add);
 

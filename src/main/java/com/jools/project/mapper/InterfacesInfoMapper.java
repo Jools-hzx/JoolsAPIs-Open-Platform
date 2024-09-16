@@ -1,7 +1,7 @@
 package com.jools.project.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.jools.project.model.entity.InterfacesInfo;
+import com.jools.joolscommon.model.entity.InterfacesInfo;
 
 /**
 * @author 10355

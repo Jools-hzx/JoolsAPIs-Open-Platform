@@ -1,7 +1,6 @@
 package com.jools.project.service;
 
-import com.jools.project.model.entity.User;
-
+import com.jools.joolscommon.model.entity.User;
 import javax.annotation.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;

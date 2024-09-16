@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jools.project.model.entity.Post;
 import com.jools.project.model.entity.PostFavour;
-import com.jools.project.model.entity.User;
+import com.jools.joolscommon.model.entity.User;
 
 /**
  * 帖子收藏服务

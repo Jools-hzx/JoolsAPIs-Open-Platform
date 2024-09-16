@@ -5,12 +5,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jools.joolscommon.model.entity.User;
 import com.jools.project.common.ErrorCode;
 import com.jools.project.exception.BusinessException;
 import com.jools.project.mapper.PostFavourMapper;
 import com.jools.project.model.entity.Post;
 import com.jools.project.model.entity.PostFavour;
-import com.jools.project.model.entity.User;
 import com.jools.project.service.PostFavourService;
 import com.jools.project.service.PostService;
 

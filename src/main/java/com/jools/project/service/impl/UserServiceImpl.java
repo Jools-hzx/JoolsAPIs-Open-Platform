@@ -6,11 +6,12 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jools.joolscommon.model.entity.User;
 import com.jools.project.common.ErrorCode;
 import com.jools.project.exception.BusinessException;
 import com.jools.project.mapper.UserMapper;
 import com.jools.project.model.dto.user.UserQueryRequest;
-import com.jools.project.model.entity.User;
+
 import com.jools.project.model.enums.UserRoleEnum;
 import com.jools.project.model.vo.LoginUserVO;
 import com.jools.project.model.vo.UserVO;

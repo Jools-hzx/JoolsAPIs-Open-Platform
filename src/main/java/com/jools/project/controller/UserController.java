@@ -1,6 +1,7 @@
 package com.jools.project.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jools.joolscommon.model.entity.User;
 import com.jools.project.annotation.AuthCheck;
 import com.jools.project.common.BaseResponse;
 import com.jools.project.common.DeleteRequest;
@@ -9,7 +10,6 @@ import com.jools.project.common.ResultUtils;
 import com.jools.project.config.WxOpenConfig;
 import com.jools.project.exception.BusinessException;
 import com.jools.project.exception.ThrowUtils;
-import com.jools.project.model.entity.User;
 import com.jools.project.model.vo.LoginUserVO;
 import com.jools.project.model.vo.UserVO;
 import com.jools.project.constant.UserConstant;
@@ -42,7 +42,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static com.jools.project.service.impl.UserServiceImpl.KEY_SALT;
 
-//import static com.yupi.springbootinit.service.impl.UserServiceImpl.SALT;
 
 /**
  * 用户接口
@@ -110,7 +109,7 @@ public class UserController {
      */
     @GetMapping("/login/wx_open")
     public BaseResponse<LoginUserVO> userLoginByWxOpen(HttpServletRequest request, HttpServletResponse response,
-            @RequestParam("code") String code) {
+                                                       @RequestParam("code") String code) {
         WxOAuth2AccessToken accessToken;
         try {
             WxMpService wxService = wxOpenConfig.getWxMpService();
@@ -210,7 +209,7 @@ public class UserController {
     @PostMapping("/update")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     public BaseResponse<Boolean> updateUser(@RequestBody UserUpdateRequest userUpdateRequest,
-            HttpServletRequest request) {
+                                            HttpServletRequest request) {
         if (userUpdateRequest == null || userUpdateRequest.getId() == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -263,7 +262,7 @@ public class UserController {
     @PostMapping("/list/page")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     public BaseResponse<Page<User>> listUserByPage(@RequestBody UserQueryRequest userQueryRequest,
-            HttpServletRequest request) {
+                                                   HttpServletRequest request) {
         long current = userQueryRequest.getCurrent();
         long size = userQueryRequest.getPageSize();
         Page<User> userPage = userService.page(new Page<>(current, size),
@@ -280,7 +279,7 @@ public class UserController {
      */
     @PostMapping("/list/page/vo")
     public BaseResponse<Page<UserVO>> listUserVOByPage(@RequestBody UserQueryRequest userQueryRequest,
-            HttpServletRequest request) {
+                                                       HttpServletRequest request) {
         if (userQueryRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -307,7 +306,7 @@ public class UserController {
      */
     @PostMapping("/update/my")
     public BaseResponse<Boolean> updateMyUser(@RequestBody UserUpdateMyRequest userUpdateMyRequest,
-            HttpServletRequest request) {
+                                              HttpServletRequest request) {
         if (userUpdateMyRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }

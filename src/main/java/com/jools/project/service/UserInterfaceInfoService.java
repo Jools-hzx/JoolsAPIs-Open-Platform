@@ -1,8 +1,9 @@
 package com.jools.project.service;
 
 
+import cn.hutool.log.Log;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.jools.project.model.entity.UserInterfaceInfo;
+import com.jools.joolscommon.model.entity.UserInterfaceInfo;
 import com.jools.project.model.vo.UserInterfaceInfoVO;
 
 /**
@@ -16,6 +17,8 @@ public interface UserInterfaceInfoService extends IService<UserInterfaceInfo> {
     void validUserInterfaceInfo(UserInterfaceInfo userInterfaceInfo, Boolean flag);
 
     boolean invokeInterfaceCount(Long interfaceInfoId, Long userId);
+
+    boolean canInvoke(Long interfaceInfoId, Long userId);
 
     UserInterfaceInfoVO convert2VO(UserInterfaceInfo userInterfaceInfo);
 }

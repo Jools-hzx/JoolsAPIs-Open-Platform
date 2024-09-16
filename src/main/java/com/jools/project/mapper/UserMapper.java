@@ -1,7 +1,8 @@
 package com.jools.project.mapper;
 
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.jools.project.model.entity.User;
+import com.jools.joolscommon.model.entity.User;
 
 /**
  * 用户数据库操作
