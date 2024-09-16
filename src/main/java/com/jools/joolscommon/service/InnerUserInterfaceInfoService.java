@@ -11,10 +11,11 @@ import com.jools.joolscommon.model.vo.UserInterfaceInfoVO;
  * @description 针对表【user_interface_info(用户调用接口关系)】的数据库操作Service
  * @createDate 2024-08-30 20:23:33
  */
-public interface InnerUserInterfaceInfoService extends IService<UserInterfaceInfo> {
+public interface InnerUserInterfaceInfoService {
 
     /**
      * 从数据库中查找是否已经分配给用户密钥 accessKey / secretKey
+     *
      * @param accessKey
      * @param secretKey
      * @return
@@ -30,5 +31,12 @@ public interface InnerUserInterfaceInfoService extends IService<UserInterfaceInf
      */
     boolean invokeInterfaceCount(Long interfaceInfoId, Long userId);
 
-    UserInterfaceInfoVO convert2VO(UserInterfaceInfo userInterfaceInfo);
+    /**
+     * 查询接口剩余可调用次数是否大于 0
+     *
+     * @param interfaceInfoId
+     * @param userId
+     * @return
+     */
+    boolean canInvoke(Long interfaceInfoId, Long userId);
 }

@@ -11,7 +11,7 @@ import org.springframework.beans.BeanUtils;
  * @description 针对表【interfaces_info(接口信息表)】的数据库操作Service
  * @createDate 2024-08-07 22:46:43
  */
-public interface InnerInterfacesInfoService extends IService<InterfacesInfo> {
+public interface InnerInterfacesInfoService {
 
     /**
      * @param path       请求接口路径
