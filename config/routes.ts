@@ -49,6 +49,20 @@ export default [
       }
     ],
   },
+  {
+    path: '/admin/interface_analysis',
+    name: '接口分析',
+    icon: 'analysis',
+    access: 'canAdmin',
+    routes: [
+      {
+        name: "接口管理",
+        icon: 'table',
+        path: '/admin/interface_analysis',
+        component: './Admin/InterfaceAnalysis'
+      }
+    ],
+  },
 
   {
     path: '*',
