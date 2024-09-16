@@ -5,7 +5,7 @@ spring:
         - id: getName_path
           uri: http://localhost:10000
           predicates:
-            - Path=/api/name/{api_url}
+            - Path=/api/name/{}
 server:
   port: 8899
 logging:

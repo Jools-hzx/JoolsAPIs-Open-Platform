@@ -14,7 +14,6 @@
     <name>api-gateway</name>
     <description>api-gateway</description>
     <properties>
-        <spring-cloud.version>2023.0.3</spring-cloud.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,16 +27,23 @@
             <version>3.0.9</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba.nacos</groupId>
             <artifactId>nacos-client</artifactId>
             <version>2.4.0-BETA</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-reactor-netty</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
             <version>2.1.5.RELEASE</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -54,10 +60,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.github.resilience4j</groupId>-->
-<!--            <artifactId>resilience4j-spring-boot2</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
@@ -67,15 +69,23 @@
             <artifactId>jools-client-sdk</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.jools</groupId>
+            <artifactId>api-jools-commons</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Greenwich.SR3</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>com.jools</groupId>
+                <artifactId>api-jools-commons</artifactId>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-web</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
