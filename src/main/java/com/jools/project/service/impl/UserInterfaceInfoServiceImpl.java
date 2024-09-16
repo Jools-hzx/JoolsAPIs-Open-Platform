@@ -15,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author 10355
@@ -39,6 +40,12 @@ public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoM
 
     @Resource
     private UserInterfaceInfoMapper mapper;
+
+    @Override
+    public List<UserInterfaceInfo> listInterfacesAnalysis(Integer limit) {
+        if (null == limit || limit < 1) throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        return mapper.listAllInterfaceAnalysisRecords(limit);
+    }
 
     @Override
     public void validUserInterfaceInfo(UserInterfaceInfo userInterfaceInfo, Boolean add) {

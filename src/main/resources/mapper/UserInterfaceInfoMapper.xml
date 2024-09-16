@@ -3,17 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jools.project.mapper.UserInterfaceInfoMapper">
-
     <resultMap id="BaseResultMap" type="com.jools.joolscommon.model.entity.UserInterfaceInfo">
-            <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="userId" column="userId" jdbcType="BIGINT"/>
-            <result property="interfaceInfoId" column="interfaceInfoId" jdbcType="BIGINT"/>
-            <result property="totalNum" column="totalNum" jdbcType="INTEGER"/>
-            <result property="leftNum" column="leftNum" jdbcType="INTEGER"/>
-            <result property="status" column="status" jdbcType="INTEGER"/>
-            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
-            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
-            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userId" column="userId" jdbcType="BIGINT"/>
+        <result property="interfaceInfoId" column="interfaceInfoId" jdbcType="BIGINT"/>
+        <result property="totalNum" column="totalNum" jdbcType="INTEGER"/>
+        <result property="leftNum" column="leftNum" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+        <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -21,4 +20,14 @@
         totalNum,leftNum,status,
         createTime,updateTime,isDelete
     </sql>
+
+    <select id="listAllInterfaceAnalysisRecords" resultMap="BaseResultMap">
+        -- 查询最多调用次数的接口
+        SELECT interfaceInfoId,
+               SUM(totalNum) as totalNum
+        FROM `user_interface_info`
+        GROUP BY interfaceInfoId
+        ORDER BY totalNum DESC
+            LIMIT #{limit};
+    </select>
 </mapper>

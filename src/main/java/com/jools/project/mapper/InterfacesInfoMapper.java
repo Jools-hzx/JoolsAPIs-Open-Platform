@@ -12,7 +12,3 @@ import com.jools.joolscommon.model.entity.InterfacesInfo;
 public interface InterfacesInfoMapper extends BaseMapper<InterfacesInfo> {
 
 }
-
-
-
-

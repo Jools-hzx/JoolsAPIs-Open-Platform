@@ -1,10 +1,11 @@
 package com.jools.project.service;
 
 
-import cn.hutool.log.Log;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jools.joolscommon.model.entity.UserInterfaceInfo;
 import com.jools.project.model.vo.UserInterfaceInfoVO;
+
+import java.util.List;
 
 /**
 * @author 10355
@@ -13,6 +14,7 @@ import com.jools.project.model.vo.UserInterfaceInfoVO;
 */
 public interface UserInterfaceInfoService extends IService<UserInterfaceInfo> {
 
+    List<UserInterfaceInfo> listInterfacesAnalysis(Integer limit);
 
     void validUserInterfaceInfo(UserInterfaceInfo userInterfaceInfo, Boolean flag);
 
