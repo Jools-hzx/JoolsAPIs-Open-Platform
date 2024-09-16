@@ -1,8 +1,7 @@
 package com.jools.hzxinterfaces.controller;
 
 import com.jools.joolsclientsdk.model.User;
-import com.jools.joolsclientsdk.uitls.SignUtil;
-import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
@@ -15,7 +14,7 @@ import java.time.Instant;
  * @description: TODO
  */
 
-@RequestMapping("/name")
+@RequestMapping("/api/name")
 @RestController
 public class NameController {
 
@@ -33,13 +32,13 @@ public class NameController {
 
     @PostMapping("/user")
     @ResponseBody
-    public String getNameByUser(@RequestBody User user, HttpServletRequest request) {
+    public String getNameByUser(@RequestBody User user) {
 
-        System.out.println("进入了 getNameByUser(@RequestBody User user, HttpServletRequest request) 接口");
+        System.out.println("进入了 getNameByUser(@RequestBody User user) 接口");
 
         //基于请求头获取参数
-        //TODO: accessKey 可以先到数据库去校验
-        String accessKey = request.getHeader("accessKey");
+        /*
+                String accessKey = request.getHeader("accessKey");
         String nonce = request.getHeader("nonce");
         String body = request.getHeader("body");
         String timestamp = request.getHeader("timestamp");
@@ -66,6 +65,7 @@ public class NameController {
         if (!sign.equals(SignUtil.getSign(body, SignUtil.TEST_SECRET_KEY))) {
             throw new RuntimeException("无权限 - API签名校验出错");
         }
+         */
 
         return "POST 用户名称是:" + user.getName();
     }

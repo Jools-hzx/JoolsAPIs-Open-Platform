@@ -2,10 +2,11 @@ package com.jools.hzxinterfaces.nametest;
 
 import com.jools.joolsclientsdk.client.JoolsHttpClient;
 import com.jools.joolsclientsdk.model.User;
-import jakarta.annotation.Resource;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.annotation.Resource;
 
 /**
  * @author Jools He

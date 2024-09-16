@@ -2,7 +2,7 @@ package com.jools.hzxinterfaces.controller;
 
 import cn.hutool.http.HttpUtil;
 import com.jools.joolsclientsdk.model.User;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.HashMap;
