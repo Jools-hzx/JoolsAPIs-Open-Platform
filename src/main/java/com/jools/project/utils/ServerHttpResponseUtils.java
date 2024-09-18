@@ -25,4 +25,9 @@ public class ServerHttpResponseUtils {
     public static void internelServerError(ServerHttpResponse response) {
         response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    //限流异常 - 请求过于频繁
+    public static void blockBySentinelException(ServerHttpResponse response) {
+        response.setStatusCode(HttpStatus.FORBIDDEN);
+    }
 }

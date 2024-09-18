@@ -5,7 +5,28 @@ spring:
         - id: getName_path
           uri: http://localhost:10000
           predicates:
-            - Path=/api/name/{}
+            - Path=/api/name/{path}
+    sentinel:
+      transport:
+        dashboard: localhost:8080   #这个是 sentinel 控制台(sentinel dashboard)的地址
+        # 解读spring.cloud.sentinel.transport.port
+        #1. spring.cloud.sentinel.transport.port 端口配置会在被监控的微服务;对应的机器上启动一个 HttpServer
+        #2. 该 Server 会与 Sentinel 控制台做交互
+        #3. 比如 Sentinel 控制台添加了1个限流规则，会把规则数据 push 给这个
+        #   Http Server 接收，Http Server 再将规则注册到 Sentinel 中
+        #4. 简单的说明:spring.cloud.sentinel.transport.port: 指定被监控的微服务应用与
+        #   Sentinel 控制台交互的端口，微服务应用本地会起一个该端口占用的HttpServer
+        port: 8719
+      enabled: true
+#      datasource:
+#        gateway-sentinel-flow-control-nacos-rule: #自定义数据源名称: #自定义数据源名称
+#          nacos:
+#            server-addr: http://localhost:8848
+#            namespace: 5a0c1a28-fae6-4926-b84c-4cb943f2f434  # 需要配置该规则所在的命名空间
+#            data-id: user-interfaceInfo-invoke-global-filter-invokeInterfaces-rule # 所配置的id
+#            rule-type: flow # 规则类型
+#            data-type: json # 默认值是 json.
+
 server:
   port: 8899
 logging:
@@ -15,7 +36,7 @@ logging:
         cloud:
           gateway: trace
 dubbo:
-  application:    # 设置应用名称
+  application: # 设置应用名称
     name: dubbo-springboot-demo-provider
   protocol:
     name: dubbo

@@ -1,5 +1,7 @@
 package com.jools.project.config;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.context.ContextUtil;
 import com.alibaba.nacos.shaded.io.grpc.netty.shaded.io.netty.buffer.Unpooled;
 import com.jools.joolscommon.model.entity.InterfacesInfo;
 import com.jools.joolscommon.model.entity.User;
@@ -84,7 +86,10 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
      */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-//        log.info("custom global filter");
+        log.info("custom global filter");
+        // 显式定义上下文,统一簇点链路
+        ContextUtil.enter("/api/name/user");
+
         //请求日志
         ServerHttpRequest request = exchange.getRequest();
         String id = request.getId();
