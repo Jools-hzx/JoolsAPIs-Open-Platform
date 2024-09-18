@@ -112,7 +112,7 @@ public class UserInterfaceInfoController {
     /**
      * 更新（仅管理员）
      *
-     * @param userInterfaceInfoUpdateRequest
+     * @param userInterfacesInfoUpdateRequest
      * @return
      */
     @PostMapping("/update")
