@@ -1,17 +1,47 @@
-<<<<<<< HEAD
-# HZX-Open-APIs
+# Jools-Open-APIs 开放平台 
 A simple API open platform that allows developers to easily query and call various interfaces. It also makes it convenient for administrators to manage the interfaces.
-=======
-
 ## 各个分支项目内容
 ```txt
 1. main 分支: admin APIs 管理后台
+
 2. api-gateway-main 分支: 网关子项目，统一处理调用接口请求的相关操作(统计调用次数、权限校验、跨域、计费、路由、接口保护、日志、缓存、流量染色等)
+
 3. hzx-interfaces-main 分支: 模拟存储各个接口的平台
+
 4. api-client-sdk-main 分支: 自定义 SpringBoot starter 客户端 SDK，工具类，让其他项目和用户更加方便地调用接口的源码包
+
 5. open-api-fontend-main 分支:  前端项目，基于 Ant Design Pro 项目模板二次开发(用户权限校验，管理员控制面板功能，远程调用接口平台功能)
+
 6. api-jools-commons-main 分支: 公共模块，共同使用的 model、interface 服务
 ```
+
+
+
+## 项目介绍
+后端基于Spring Boot + Dubbo + Gateway，前端基于 Ant Design Pro 的 API 接口开放调用平台。
+
+### 管理员权限:
+1. 接入并发布接口
+2. 可视化各接口调用情况
+
+### 用户权限:
+1. 开通接口调用权限
+2. 浏览接口及在线调试
+3. 通过客户端 SDK 轻松调用接口
+
+管理员可以接入并发布接口，可视化各接口调用情况:用户可以开通接口调用权限、浏览接口及在线调试，并通过客户端
+SDK 轻松调用接口。
+
+### 完成工作:
+1. 将项目后端划分成为多模块使用 Maven 进行多模块依赖管理和打包。包括: 后台系统、模拟接口、公共模块、客户端 SDK、API 网关。借助MyBatis X 插件快速生成基础代码，减少重复工作
+2. 提升接口调用的安全性和可溯源性，设计 API 签名认证算法，为用户分配唯一 ak/sk 鉴权。
+3. 开发基于 Spring Boot Starter 的客户端 SDK，实现一行代码调用接口，简化开发者操作。介绍开发者调用成本过高的问题
+4. 使用 Spring Cloud Gateway 作为 API 网关，集中处理路由转发、签名校验、访问控制等，提高安全性与维护效率。
+5. 抽象模型层与业务层为公共模块，使用 Dubbo RPC框架实现子系统间高性能调用，选用Nacos作为服务注册中心，减少代码重复。
+6. 前端基于 Ant Design Pro 脚手架和自带的 umi-request 请求库提高开发效率。使用 EChart 可视化库实现了接口调用的分析图表。
+
+
+---
 
 ## main 分支 - 管理员接口后台管理平台
 ### 基于 SpringBoot 项目快速开发初始模板二次开发
