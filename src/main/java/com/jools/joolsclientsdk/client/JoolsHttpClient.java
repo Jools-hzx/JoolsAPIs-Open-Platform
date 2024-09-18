@@ -84,12 +84,18 @@ public class JoolsHttpClient {
         int status = httpResponse.getStatus();
         System.out.println("ResponseStatus - " + status);
 
-        // 处理限流 (HTTP 429)
-        if (status == HttpStatus.HTTP_TOO_MANY_REQUESTS) {
+        // 处理限流 (HTTP 429) 和 处理降级 (HTTP 503)
+        /*
+        ResponseStatus - 429
+        限流响应: Blocked by Sentinel: DegradeException
+         */
+        if (status != HttpStatus.HTTP_OK) {
             // 打印并返回限流提示信息
             String result = httpResponse.body();
-            System.out.println("限流响应: " + result);
-            return "请求过于频繁，请稍后再试。";
+            System.out.println("流控响应: " + result);
+            if (result.contains("DegradeException")) return "服务开小差了，请稍后再试";
+            else if (result.contains("FlowException")) return "请求过于频繁，请稍后再试";
+            return "服务异常，请稍后再试";
         }
 
         //获取结果
