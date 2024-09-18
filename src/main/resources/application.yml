@@ -19,12 +19,19 @@ spring:
         port: 8719
       enabled: true
       datasource:
-        gateway-sentinel-flow-control-nacos-rule: #自定义数据源名称: #自定义数据源名称
+        gateway-sentinel-flow-control-nacos-rule: #自定义数据源名称(此为限流规则)
           nacos:
             server-addr: http://localhost:8848
             namespace: 5a0c1a28-fae6-4926-b84c-4cb943f2f434  # 需要配置该规则所在的命名空间
             data-id: user-interfaceInfo-invoke-global-filter-invokeInterfaces-rule # 所配置的id
-            rule-type: flow # 规则类型
+            rule-type: flow # 规则类型 - 限流
+            data-type: json # 默认值是 json.
+        gateway-sentinel-degrade-control-nacos-rule: #自定义数据源名称(此为限流规则)
+          nacos:
+            server-addr: http://localhost:8848
+            namespace: 5a0c1a28-fae6-4926-b84c-4cb943f2f434  # 需要配置该规则所在的命名空间
+            data-id: api-name-user-interfaceinvok-fallback-rule # 所配置的id
+            rule-type: degrade # 规则类型 - 降级
             data-type: json # 默认值是 json.
 
 server:

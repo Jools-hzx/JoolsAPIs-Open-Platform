@@ -2,6 +2,7 @@ package com.jools.project.config;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.context.ContextUtil;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.nacos.shaded.io.grpc.netty.shaded.io.netty.buffer.Unpooled;
 import com.jools.joolscommon.model.entity.InterfacesInfo;
 import com.jools.joolscommon.model.entity.User;
@@ -30,6 +31,8 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpResponseDecorator;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -194,6 +197,11 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
             ServerHttpResponseUtils.internelServerError(response);
             return response.setComplete();
         }
+
+        //测试 DegradeException 异常
+//        if (Math.random() > 0.5) {
+//            throw new RuntimeException("模拟异常测试降级规则");
+//        }
 
         //传入 接口 Id 和用户 Id
         return handleResponse(exchange, chain, interfaceInfoId, userId);
