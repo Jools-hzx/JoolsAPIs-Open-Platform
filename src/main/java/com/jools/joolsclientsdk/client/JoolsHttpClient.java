@@ -3,6 +3,7 @@ package com.jools.joolsclientsdk.client;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
+import cn.hutool.http.HttpStatus;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import com.jools.joolsclientsdk.model.User;
@@ -82,6 +83,14 @@ public class JoolsHttpClient {
         //获取结果状态
         int status = httpResponse.getStatus();
         System.out.println("ResponseStatus - " + status);
+
+        // 处理限流 (HTTP 429)
+        if (status == HttpStatus.HTTP_TOO_MANY_REQUESTS) {
+            // 打印并返回限流提示信息
+            String result = httpResponse.body();
+            System.out.println("限流响应: " + result);
+            return "请求过于频繁，请稍后再试。";
+        }
 
         //获取结果
         String result = httpResponse.body();
