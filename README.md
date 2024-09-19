@@ -1,5 +1,17 @@
 # Jools-Open-APIs 开放平台 
 A simple API open platform that allows developers to easily query and call various interfaces. It also makes it convenient for administrators to manage the interfaces.
+
+![Static Badge](https://img.shields.io/badge/Jools_OpenAPIs_Platform-version_1.0-blue)
+![Static Badge](https://img.shields.io/badge/Spring_framework-SpringBoot_2.7.x-green?logo=spring)
+![Static Badge](https://img.shields.io/badge/Dubbo_3.0.9-8A2BE2?logo=appveyor)
+![Static Badge](https://img.shields.io/badge/Nacos_2.4-grey?logo=appveyor)
+![Static Badge](https://img.shields.io/badge/MySQL_8.0.34-grey?logo=appveyor)
+![Static Badge](https://img.shields.io/badge/JDK_version-Java_1.8.x-blue?logo=java)
+![Static Badge](https://img.shields.io/badge/Node-v_16.13-blue?logo=javascript)
+![Static Badge](https://img.shields.io/badge/npm-v8.1-red?logo=javascript)
+
+
+
 ## 各个分支项目内容
 ```txt
 1. main 分支: admin APIs 管理后台
