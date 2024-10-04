@@ -105,7 +105,19 @@ public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoM
         //更新接口剩余的可调用次数和总计调用次数
         updateWrapper.setSql("leftNum = leftNum - 1, totalNum = totalNum + 1");
 
-        return this.update(updateWrapper);
+        boolean updated = this.update(updateWrapper);
+
+        //测试分布式事务
+//        if (true) {
+//            throw new BusinessException(ErrorCode.SYSTEM_ERROR);
+//        }
+
+//        try {
+//            Thread.sleep(20000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+        return updated;
     }
 
     @Override

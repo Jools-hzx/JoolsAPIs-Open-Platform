@@ -7,8 +7,10 @@ import com.jools.project.common.ErrorCode;
 import com.jools.project.exception.BusinessException;
 import com.jools.project.mapper.UserMapper;
 import com.jools.project.service.UserInterfaceInfoService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -55,6 +57,11 @@ public class InnerUserInterfaceInfoServiceImpl implements InnerUserInterfaceInfo
      * @param userId          用户 id
      * @return
      */
+    @GlobalTransactional(
+            name = "invoke-interface-global-transaction",
+            rollbackFor = Exception.class,
+            timeoutMills = 20000)
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean invokeInterfaceCount(Long interfaceInfoId, Long userId) {
         //参数校验

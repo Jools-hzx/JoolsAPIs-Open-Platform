@@ -53,6 +53,13 @@ spring:
     multipart:
       # 大小限制
       max-file-size: 10MB
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    alibaba:
+      seata:
+        tx-service-group: default
 server:
   address: 0.0.0.0
   port: 8888
@@ -119,12 +126,41 @@ dubbo:
   application:
     # 设置应用名称
     name: dubbo-springboot-demo-provider
-  protocol:   # 配置端口协议
+  protocol: # 配置端口协议
     name: dubbo
     port: -1
   registry:
-    address: nacos://localhost:8848
+    address: nacos://127.0.0.1:8848
     id: nacos-registry
+    group: SEATA_GROUP               # 注册到与 Seata Server 相同的组
+    parameters:
+      namespace: f9e97085-00c9-4389-b947-0a7aef458f78  # 通过 parameters 指定 Nacos 命名空间
   cache:
     # 更改缓存目录
     file: D:/Maven/.m2/.dubbo
+seata:
+  client:
+    rm:
+      register-timeout: 20000
+  enabled: true
+  # Seata 应用编号，默认为     ${spring.application.name}
+  application-id: Hzx-Open-Apis-Platform
+  # Seata 事务组编号，用于 TC 集群名称
+  tx-service-group: Hzx-Open-Apis-Platform-group  # Seata 事务组名称
+  # 开启自动代理
+  enable-auto-data-source-proxy: true
+  service:
+    vgroup-mapping:
+      Hzx-Open-Apis-Platform-group: default        # 将自定义的事务组（your_tx_group）映射到 Seata 服务端的默认配置。
+    enable-degrade: false           # 不启用降级功能
+  registry:
+    type: nacos                    # 使用 Nacos 作为注册中心
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: f9e97085-00c9-4389-b947-0a7aef458f78
+  config:
+    type: nacos                    # 使用 Nacos 作为配置中心
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: f9e97085-00c9-4389-b947-0a7aef458f78
+      group: 'SEATA_GROUP'

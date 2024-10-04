@@ -23,6 +23,12 @@
     </properties>
 
     <dependencies>
+        <!--        Seata-->
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-spring-boot-starter</artifactId>
+            <version>1.6.0</version> <!-- 请根据需要替换为最新的稳定版本 -->
+        </dependency>
         <!--        Dubbo-->
         <dependency>
             <groupId>org.apache.dubbo</groupId>
