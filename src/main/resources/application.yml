@@ -43,6 +43,9 @@ logging:
         cloud:
           gateway: trace
 dubbo:
+  consumer:
+    timeout: 20000   # 设置全局超时时间为20秒
+    retries: 0  # 禁用重试 测试时防止触发流控
   application: # 设置应用名称
     name: dubbo-springboot-demo-provider
   protocol:
@@ -51,5 +54,8 @@ dubbo:
   registry:
     id: nacos-registry    # 配置注册中心为 Nacos，使用的地址是 nacos://localhost:8848
     address: nacos://localhost:8848
+    group: SEATA_GROUP               # 注册到与 Seata Server 相同的组
+    parameters:
+      namespace: f9e97085-00c9-4389-b947-0a7aef458f78  # 注册到与 Seata Server 相同的命名空间
   cache:
     file: D:/Maven/.m2/.dubbo
