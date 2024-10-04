@@ -5,6 +5,8 @@ A simple API open platform that allows developers to easily query and call vario
 ![Static Badge](https://img.shields.io/badge/Spring_framework-SpringBoot_2.7.x-green?logo=spring)
 ![Static Badge](https://img.shields.io/badge/Dubbo_3.0.9-8A2BE2?logo=appveyor)
 ![Static Badge](https://img.shields.io/badge/Nacos_2.4-grey?logo=appveyor)
+![Static Badge](https://img.shields.io/badge/Sentinel-1.8.0-green?logo=spring)
+![Static Badge](https://img.shields.io/badge/Seata-1.8.0-darkblue?logo=spring)
 ![Static Badge](https://img.shields.io/badge/MySQL_8.0.34-grey?logo=appveyor)
 ![Static Badge](https://img.shields.io/badge/JDK_version-Java_1.8.x-blue?logo=java)
 ![Static Badge](https://img.shields.io/badge/Node-v_16.13-blue?logo=javascript)
