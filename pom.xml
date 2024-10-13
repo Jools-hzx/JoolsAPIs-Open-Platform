@@ -22,6 +22,36 @@
         <spring-boot.version>2.7.15</spring-boot.version>
     </properties>
 
+    <!--配置不同的profile，对应不同的生产环境-->
+    <profiles>
+        <profile>
+            <!--开发-->
+            <id>dev</id>
+            <activation>
+                <!--默认开发环境-->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!--      自定义的变量名称env作为标签，标签内是我们配置文件不同环境的后缀          -->
+                <env>dev</env>
+            </properties>
+        </profile>
+        <profile>
+            <!--生产-->
+            <id>prod</id>
+            <properties>
+                <env>prod</env>
+            </properties>
+        </profile>
+        <profile>
+            <!--测试-->
+            <id>test</id>
+            <properties>
+                <env>test</env>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <!--        Seata-->
         <dependency>
@@ -195,7 +225,24 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+            </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <!--   指定配置文件的位置  -->
+                <directory>src/main/resources</directory>
+                <includes>
+                    <!--   读取resources下的所有文件，include表示指定文件内的，相对的还有excludes ，排除其下的文件 -->
+                    <include>**/*</include>
+                </includes>
+                <!-- 开启替换标签，比如我们的'@env'就是通过这个替换的         -->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

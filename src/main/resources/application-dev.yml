@@ -6,7 +6,7 @@ spring:
     name: Hzx-Open-Apis-Platform
   # 默认 dev 环境
   profiles:
-    active: dev
+    active: '@env@'
   # 支持 swagger3
   mvc:
     pathmatch:

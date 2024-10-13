@@ -1,0 +1,44 @@
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+CREATE TABLE `user_interface_info` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `userId` bigint NOT NULL COMMENT '调用用户 id',
+  `interfaceInfoId` bigint NOT NULL COMMENT '接口 id',
+  `totalNum` int NOT NULL DEFAULT '0' COMMENT '总调用次数',
+  `leftNum` int NOT NULL DEFAULT '0' COMMENT '剩余调用次数',
+  `status` int NOT NULL DEFAULT '0' COMMENT '0-正常，1-禁用',
+  `createTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `isDelete` tinyint NOT NULL DEFAULT '0' COMMENT '是否删除(0-未删, 1-已删)',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户调用接口关系';
+
+INSERT INTO `user_interface_info` (`id`, `userId`, `interfaceInfoId`, `totalNum`, `leftNum`, `status`, `createTime`, `updateTime`, `isDelete`) VALUES
+(1, 1, 1, 103, 7, 0, '2022-10-03 19:19:59', '2024-09-09 19:15:48', 0);
+INSERT INTO `user_interface_info` (`id`, `userId`, `interfaceInfoId`, `totalNum`, `leftNum`, `status`, `createTime`, `updateTime`, `isDelete`) VALUES
+(2, 2, 1, 103, 7, 0, '2024-09-02 12:00:55', '2024-09-02 14:18:06', 0);
+INSERT INTO `user_interface_info` (`id`, `userId`, `interfaceInfoId`, `totalNum`, `leftNum`, `status`, `createTime`, `updateTime`, `isDelete`) VALUES
+(3, 3, 1, 103, 7, 0, '2024-09-02 12:00:58', '2024-09-02 14:18:06', 0);
+INSERT INTO `user_interface_info` (`id`, `userId`, `interfaceInfoId`, `totalNum`, `leftNum`, `status`, `createTime`, `updateTime`, `isDelete`) VALUES
+(4, 1821023112521080833, 1, 6, 100, 0, '2024-09-16 11:26:07', '2024-09-17 18:40:20', 0),
+(5, 1828036828521308161, 1, 374, 91, 0, '2024-09-16 12:09:01', '2024-10-04 19:27:04', 0),
+(6, 1828036828521308161, 2, 22, 10, 0, '2024-09-16 15:31:59', '2024-09-16 15:31:59', 0),
+(7, 1828036828521308161, 3, 333, 10, 0, '2024-09-16 15:31:59', '2024-09-18 11:56:41', 0),
+(8, 1828036828521308161, 4, 144, 10, 0, '2024-09-16 15:31:59', '2024-09-18 11:56:41', 0),
+(9, 1821023112521080833, 5, 55, 10, 0, '2024-09-16 15:31:59', '2024-09-16 15:31:59', 0),
+(10, 1821023112521080833, 5, 99, 10, 0, '2024-09-16 15:31:59', '2024-09-18 14:56:14', 0);
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
