@@ -5,6 +5,8 @@ A simple API open platform that allows developers to easily query and call vario
 ![Static Badge](https://img.shields.io/badge/Spring_framework-SpringBoot_2.7.x-green?logo=spring)
 ![Static Badge](https://img.shields.io/badge/Dubbo_3.0.9-8A2BE2?logo=appveyor)
 ![Static Badge](https://img.shields.io/badge/Nacos_2.4-grey?logo=appveyor)
+![Static Badge](https://img.shields.io/badge/Sentinel-1.8.0-green?logo=spring)
+![Static Badge](https://img.shields.io/badge/Seata-1.8.0-darkblue?logo=spring)
 ![Static Badge](https://img.shields.io/badge/MySQL_8.0.34-grey?logo=appveyor)
 ![Static Badge](https://img.shields.io/badge/JDK_version-Java_1.8.x-blue?logo=java)
 ![Static Badge](https://img.shields.io/badge/Node-v_16.13-blue?logo=javascript)
@@ -50,7 +52,8 @@ SDK 轻松调用接口。
 3. 开发基于 Spring Boot Starter 的客户端 SDK，实现一行代码调用接口，简化开发者操作。介绍开发者调用成本过高的问题
 4. 使用 Spring Cloud Gateway 作为 API 网关，集中处理路由转发、签名校验、访问控制等，提高安全性与维护效率。
 5. 抽象模型层与业务层为公共模块，使用 Dubbo RPC框架实现子系统间高性能调用，选用Nacos作为服务注册中心，减少代码重复。
-6. 前端基于 Ant Design Pro 脚手架和自带的 umi-request 请求库提高开发效率。使用 EChart 可视化库实现了接口调用的分析图表。
+6. 基于 Seata 框架实现分布式事务管理，结合 Nacos 服务注册与配置集中管理，确保各微服务间的事务一致性及自动化回滚，提升数据可靠性和一致性。
+7. 前端基于 Ant Design Pro 脚手架和自带的 umi-request 请求库提高开发效率。使用 EChart 可视化库实现了接口调用的分析图表。
 
 
 ---
