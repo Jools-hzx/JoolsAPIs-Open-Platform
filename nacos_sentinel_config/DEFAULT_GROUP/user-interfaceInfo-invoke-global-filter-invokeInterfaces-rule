@@ -1,0 +1,10 @@
+[
+  { 
+  "resource": "getName_path",  
+  "controlBehavior": 0,          
+  "count": 20,                    
+  "grade": 1,                    
+  "limitApp": "default",         
+  "strategy": 0                 
+  }
+] 

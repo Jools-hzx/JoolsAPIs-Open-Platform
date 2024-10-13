@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: '@env@'
   cloud:
     gateway:
       routes:
@@ -10,7 +8,7 @@ spring:
             - Path=/api/name/{path}
     sentinel:
       transport:
-        dashboard: localhost:8080   #这个是 sentinel 控制台(sentinel dashboard)的地址
+        dashboard: 43.139.242.193:8858   #这个是 sentinel 控制台(sentinel dashboard)的地址
         # 解读spring.cloud.sentinel.transport.port
         #1. spring.cloud.sentinel.transport.port 端口配置会在被监控的微服务;对应的机器上启动一个 HttpServer
         #2. 该 Server 会与 Sentinel 控制台做交互
@@ -23,14 +21,14 @@ spring:
       datasource:
         gateway-sentinel-flow-control-nacos-rule: #自定义数据源名称(此为限流规则)
           nacos:
-            server-addr: http://localhost:8848
+            server-addr: http://43.139.242.193:8848
             namespace: 5a0c1a28-fae6-4926-b84c-4cb943f2f434  # 需要配置该规则所在的命名空间
             data-id: user-interfaceInfo-invoke-global-filter-invokeInterfaces-rule # 所配置的id
             rule-type: flow # 规则类型 - 限流
             data-type: json # 默认值是 json.
         gateway-sentinel-degrade-control-nacos-rule: #自定义数据源名称(此为限流规则)
           nacos:
-            server-addr: http://localhost:8848
+            server-addr: http://43.139.242.193:8848
             namespace: 5a0c1a28-fae6-4926-b84c-4cb943f2f434  # 需要配置该规则所在的命名空间
             data-id: api-name-user-interfaceinvok-fallback-rule # 所配置的id
             rule-type: degrade # 规则类型 - 降级
@@ -48,16 +46,16 @@ dubbo:
   consumer:
     timeout: 20000   # 设置全局超时时间为20秒
     retries: 0  # 禁用重试 测试时防止触发流控
-  application: # 设置应用名称
+  application:
     name: dubbo-springboot-demo-provider
   protocol:
     name: dubbo
     port: 20880
   registry:
-    id: nacos-registry    # 配置注册中心为 Nacos，使用的地址是 nacos://localhost:8848
-    address: nacos://localhost:8848
-    group: SEATA_GROUP               # 注册到与 Seata Server 相同的组
+    address: nacos://43.139.242.193:8848
+    id: nacos-registry
+    group: SEATA_GROUP  # 分组，注意位置
     parameters:
-      namespace: f9e97085-00c9-4389-b947-0a7aef458f78  # 注册到与 Seata Server 相同的命名空间
+      namespace: f9e97085-00c9-4389-b947-0a7aef458f78  # 命名空间，注意位置
   cache:
-    file: D:/Maven/.m2/.dubbo
+    file: /root/.dubbo
