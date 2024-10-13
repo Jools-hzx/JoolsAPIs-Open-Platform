@@ -1,6 +1,7 @@
-﻿import type {RequestOptions} from '@@/plugin-request/request';
-import type {RequestConfig} from '@umijs/max';
-import {message, notification} from 'antd';
+﻿import type { RequestConfig } from '@umijs/max';
+import type { RequestOptions } from '@@/plugin-request/request';
+// import {message, notification} from 'antd';
+
 
 // 错误处理方案： 错误类型
 enum ErrorShowType {
@@ -16,7 +17,7 @@ interface ResponseStructure {
   success: boolean;
   data: any;
   errorCode?: number;
-  errorMessage?: string;
+  errorMessage?: string;1
   showType?: ErrorShowType;
 }
 
@@ -26,7 +27,12 @@ interface ResponseStructure {
  * @doc https://umijs.org/docs/max/request#配置
  */
 export const requestConfig: RequestConfig = {
-  baseURL: 'http://localhost:8888',
+  baseURL:
+    process.env.NODE_ENV === 'production'
+      ? 'http://43.139.242.193:8888' // 生产环境 API 地址
+      : 'http://localhost:8888', // 开发环境 API 地址
+  // baseURL: process.env.NODE_ENV === 'production' ? '43.139.242.193:8888' : 'http://localhost:8888',
+
   withCredentials: true,
   // 请求拦截器
   requestInterceptors: [
